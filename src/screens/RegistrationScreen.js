@@ -60,6 +60,7 @@ const RegistrationScreen = () => {
         )}
       </Formik>
       <Text style={styles.link}>
+        Вже є акаунт?{" "}
         <Text
           style={{
             ...styles.link,
@@ -69,7 +70,7 @@ const RegistrationScreen = () => {
           }}
           onPress={openLink("https://www.edu.goit.global/uk/account/login")}
         >
-          Вже є акаунт? Увійти
+          Увійти
         </Text>
       </Text>
     </View>
