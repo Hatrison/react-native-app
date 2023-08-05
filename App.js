@@ -8,7 +8,7 @@ export default function App() {
         source={require("./assets/bg.jpg")}
         style={styles.backgroundImage}
       >
-        <RegistrationScreen />
+        <LoginScreen />
       </ImageBackground>
     </View>
   );

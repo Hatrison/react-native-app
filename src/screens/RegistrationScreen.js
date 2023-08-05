@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import openLink from "../helpers/openLink";
 
 const RegistrationScreen = () => {
   return (
@@ -58,7 +59,19 @@ const RegistrationScreen = () => {
           </View>
         )}
       </Formik>
-      <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+      <Text style={styles.link}>
+        <Text
+          style={{
+            ...styles.link,
+            textDecorationLine: "underline",
+            textDecorationStyle: "solid",
+            textDecorationColor: "#1B4371",
+          }}
+          onPress={openLink("https://www.edu.goit.global/uk/account/login")}
+        >
+          Вже є акаунт? Увійти
+        </Text>
+      </Text>
     </View>
   );
 };
