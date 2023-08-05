@@ -1,5 +1,4 @@
 import { Formik } from "formik";
-import { useState } from "react";
 import {
   Image,
   Pressable,
@@ -10,10 +9,6 @@ import {
 } from "react-native";
 
 const RegistrationScreen = () => {
-  const [login, setLogin] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   return (
     <View style={styles.container}>
       <Image style={styles.image} />
@@ -44,14 +39,17 @@ const RegistrationScreen = () => {
               onBlur={handleBlur("email")}
               value={values.email}
             />
-            <TextInput
-              style={{ ...styles.input, marginBottom: 27 }}
-              placeholder="Пароль"
-              secureTextEntry={true}
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              value={values.password}
-            />
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Пароль"
+                secureTextEntry={true}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+              />
+              <Text style={styles.passwordView}>Показати</Text>
+            </View>
             <Pressable style={styles.button} onPress={handleSubmit}>
               <Text style={{ color: "#fff", fontSize: 16 }}>
                 Зареєстуватися
@@ -124,6 +122,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E5E5E5",
     borderRadius: 10,
+  },
+  passwordContainer: {
+    marginBottom: 27,
+    position: "relative",
+  },
+  passwordView: {
+    position: "absolute",
+    top: 25,
+    right: 16,
+    transform: [{ translateY: -12 }],
+    fontSize: 16,
+    color: "#1B4371",
   },
   button: {
     display: "flex",
