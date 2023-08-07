@@ -6,58 +6,68 @@ import {
   Text,
   TextInput,
   View,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
 } from "react-native";
 import openLink from "../helpers/openLink";
 
 const LoginScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.mainTitle}>Увійти</Text>
-      <Formik
-        initialValues={{ login: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
-      >
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Адреса електронної пошти"
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              value={values.email}
-            />
-            <View style={styles.passwordContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Пароль"
-                secureTextEntry={true}
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                value={values.password}
-              />
-              <Text style={styles.passwordView}>Показати</Text>
-            </View>
-            <Pressable style={styles.button} onPress={handleSubmit}>
-              <Text style={{ color: "#fff", fontSize: 16 }}>Увійти</Text>
-            </Pressable>
-          </View>
-        )}
-      </Formik>
-      <Text style={styles.link}>
-        Немає акаунту?{" "}
-        <Text
-          style={{
-            ...styles.link,
-            textDecorationLine: "underline",
-            textDecorationStyle: "solid",
-            textDecorationColor: "#1B4371",
-          }}
-          onPress={openLink("https://www.edu.goit.global/uk/account/signup")}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.mainTitle}>Увійти</Text>
+        <Formik
+          initialValues={{ login: "", email: "", password: "" }}
+          onSubmit={(values) => console.log(values)}
         >
-          Зареєструватися
+          {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <View style={styles.form}>
+              <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+              >
+                <TextInput
+                  style={styles.input}
+                  placeholder="Адреса електронної пошти"
+                  onChangeText={handleChange("email")}
+                  onBlur={handleBlur("email")}
+                  value={values.email}
+                />
+                <View style={styles.passwordContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Пароль"
+                    secureTextEntry={true}
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                    value={values.password}
+                  />
+                  <Text style={styles.passwordView}>Показати</Text>
+                </View>
+              </KeyboardAvoidingView>
+              <Pressable style={styles.button} onPress={handleSubmit}>
+                <Text style={{ color: "#fff", fontSize: 16 }}>Увійти</Text>
+              </Pressable>
+            </View>
+          )}
+        </Formik>
+        <Text style={styles.link}>
+          Немає акаунту?{" "}
+          <Text
+            style={{
+              ...styles.link,
+              textDecorationLine: "underline",
+              textDecorationStyle: "solid",
+              textDecorationColor: "#1B4371",
+            }}
+            onPress={openLink("https://www.edu.goit.global/uk/account/signup")}
+          >
+            Зареєструватися
+          </Text>
         </Text>
-      </Text>
-    </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

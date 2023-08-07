@@ -6,74 +6,84 @@ import {
   Text,
   TextInput,
   View,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
 } from "react-native";
 import openLink from "../helpers/openLink";
 
 const RegistrationScreen = () => {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} />
-      <View style={styles.add}>
-        <Image
-          style={styles.iconAdd}
-          source={require("../../assets/icon-add.png")}
-        />
-      </View>
-      <Text style={styles.mainTitle}>Реєстрація</Text>
-      <Formik
-        initialValues={{ login: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
-      >
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Логін"
-              onChangeText={handleChange("login")}
-              onBlur={handleBlur("login")}
-              value={values.login}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Адреса електронної пошти"
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              value={values.email}
-            />
-            <View style={styles.passwordContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Пароль"
-                secureTextEntry={true}
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                value={values.password}
-              />
-              <Text style={styles.passwordView}>Показати</Text>
-            </View>
-            <Pressable style={styles.button} onPress={handleSubmit}>
-              <Text style={{ color: "#fff", fontSize: 16 }}>
-                Зареєстуватися
-              </Text>
-            </Pressable>
-          </View>
-        )}
-      </Formik>
-      <Text style={styles.link}>
-        Вже є акаунт?{" "}
-        <Text
-          style={{
-            ...styles.link,
-            textDecorationLine: "underline",
-            textDecorationStyle: "solid",
-            textDecorationColor: "#1B4371",
-          }}
-          onPress={openLink("https://www.edu.goit.global/uk/account/login")}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Image style={styles.image} />
+        <View style={styles.add}>
+          <Image
+            style={styles.iconAdd}
+            source={require("../../assets/icon-add.png")}
+          />
+        </View>
+        <Text style={styles.mainTitle}>Реєстрація</Text>
+        <Formik
+          initialValues={{ login: "", email: "", password: "" }}
+          onSubmit={(values) => console.log(values)}
         >
-          Увійти
+          {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <View style={styles.form}>
+              <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+              >
+                <TextInput
+                  style={styles.input}
+                  placeholder="Логін"
+                  onChangeText={handleChange("login")}
+                  onBlur={handleBlur("login")}
+                  value={values.login}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Адреса електронної пошти"
+                  onChangeText={handleChange("email")}
+                  onBlur={handleBlur("email")}
+                  value={values.email}
+                />
+                <View style={styles.passwordContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Пароль"
+                    secureTextEntry={true}
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                    value={values.password}
+                  />
+                  <Text style={styles.passwordView}>Показати</Text>
+                </View>
+              </KeyboardAvoidingView>
+              <Pressable style={styles.button} onPress={handleSubmit}>
+                <Text style={{ color: "#fff", fontSize: 16 }}>
+                  Зареєстуватися
+                </Text>
+              </Pressable>
+            </View>
+          )}
+        </Formik>
+        <Text style={styles.link}>
+          Вже є акаунт?{" "}
+          <Text
+            style={{
+              ...styles.link,
+              textDecorationLine: "underline",
+              textDecorationStyle: "solid",
+              textDecorationColor: "#1B4371",
+            }}
+            onPress={openLink("https://www.edu.goit.global/uk/account/login")}
+          >
+            Увійти
+          </Text>
         </Text>
-      </Text>
-    </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
